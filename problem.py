@@ -4,7 +4,7 @@ from state import State
 from action import Action
 
 
-class Problem:
+class Problem(ABC):
     def __init__(self, initial_state: State, goal_state: State):
         self.initial_state = initial_state
         self.goal_state = goal_state
