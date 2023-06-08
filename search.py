@@ -6,5 +6,5 @@ from node import Node
 
 class Search(ABC):
     @abstractmethod
-    def search(self, evaluation_function: Callable[[Node], float]):
+    def search(self, problem: Problem, evaluation_function: Callable[[Node], float]):
         pass
