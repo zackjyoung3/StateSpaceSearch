@@ -2,12 +2,15 @@ from abc import ABC, abstractmethod
 from node import Node
 from state import State
 from action import Action
+from evaluation_function import HeuristicEvaluationFunction
 
 
 class Problem(ABC):
-    def __init__(self, initial_state: State, goal_state: State):
+    def __init__(self, initial_state: State, goal_state: State, heuristic_eval: HeuristicEvaluationFunction):
         self.initial_state = initial_state
         self.goal_state = goal_state
+        self.heuristic_eval = heuristic_eval
+        heuristic_eval.set_goal_state(goal_state)
 
     def get_initial_state(self) -> State:
         return self.initial_state
@@ -20,7 +23,7 @@ class Problem(ABC):
         return state == self.goal_state
 
     @abstractmethod
-    def get_actions(self, state: State) -> [Action]:
+    def get_actions(self, state: State) -> list[Action]:
         """
         :param state: a state in the problem
         :return: all actions that can be taken from this state

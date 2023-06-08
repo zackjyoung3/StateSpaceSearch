@@ -14,12 +14,17 @@ class CostFunction(EvaluationFunction):
 
 
 class HeuristicEvaluationFunction(EvaluationFunction):
+    def __init__(self, goal_state: State = None):
+        self.goal_state = goal_state
     @abstractmethod
     def evaluate(self, state: State, cost: float):
         pass
 
+    def set_goal_state(self, goal_state: State):
+        self.goal_state = goal_state
 
-class A_Star(EvaluationFunction):
+
+class AStarEval(EvaluationFunction):
     def __init__(self, heuristic_eval_func: HeuristicEvaluationFunction):
         self.cost_func = CostFunction()
         self.heuristic_eval_func = heuristic_eval_func
