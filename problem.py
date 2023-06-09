@@ -9,6 +9,7 @@ class Problem(ABC):
     def __init__(self, initial_state: State, goal_state: State, heuristic_eval: HeuristicEvaluationFunction):
         self.initial_state = initial_state
         self.goal_state = goal_state
+        assert issubclass(type(heuristic_eval), HeuristicEvaluationFunction)
         self.heuristic_eval = heuristic_eval
         heuristic_eval.set_goal_state(goal_state)
 
