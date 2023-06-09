@@ -12,7 +12,7 @@ class Node:
         :param cost: the cost that it took to get to this node i.e. accumulated cost
         :param func_measure: the heuristic evaluation function measure for this node (if UCS just cost)
         """
-        self.s = s
+        self.state = s
         self.parent = node
         self.prev_action = action
         self.cost = cost
@@ -23,6 +23,9 @@ class Node:
 
     def __eq__(self, other):
         return self.func_measure == other.func_measure
+
+    def __gt__(self, other):
+        return self.func_measure < other.func_measure
 
     def __hash__(self):
         return hash(self.func_measure)
