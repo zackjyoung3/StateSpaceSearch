@@ -1,4 +1,5 @@
 import math
+import random
 
 
 def euclidean_distance(x1, y1, x2, y2):
@@ -6,6 +7,7 @@ def euclidean_distance(x1, y1, x2, y2):
 
 
 GRAPH = {}
+random.seed(96)
 
 cities = [
     ("New York City", 0, 0),
@@ -52,7 +54,8 @@ for i in range(len(cities)):
             neighbor_name, neighbor_x, neighbor_y = neighbor_city
 
             distance = euclidean_distance(current_x, current_y, neighbor_x, neighbor_y)
-            cost = distance + 100  # Add 100 to make the cost greater than the distance
+            # Add rand num in [1,1000] to make the cost greater than the distance
+            cost = distance + random.randint(1, 1000)
 
             GRAPH[current_city].append((neighbor_city, cost))
 
