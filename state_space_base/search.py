@@ -1,8 +1,8 @@
-from abc import ABC, abstractmethod
-from problem import Problem
-from evaluation_function import EvaluationFunction, CostFunction, AStarEval
-from priority_queue import MinPriorityQueue
-from node import Node
+from abc import ABC
+from state_space_base.problem import Problem
+from state_space_base.evaluation_function import EvaluationFunction, CostFunction, AStarEval
+from priority_queue.priority_queue import MinPriorityQueue
+from state_space_base.node import Node
 from solution import Solution
 
 
@@ -12,7 +12,8 @@ class Search(ABC):
     def __init__(self, problem: Problem):
         self.problem = problem
 
-    def search(self, problem: Problem) -> Solution:
+    def search(self, problem: Problem = None) -> Solution:
+        self.problem = problem if problem is not None else self.problem
         reached = {}
         frontier = MinPriorityQueue()
         node = Node(self.problem.get_initial_state(), None, None, 0, 0)
@@ -20,11 +21,11 @@ class Search(ABC):
         reached[node.state] = node
         while not frontier.is_empty():
             node = frontier.dequeue()
-            if problem.is_goal_state(node.state):
+            if self.problem.is_goal_state(node.state):
                 return Solution(node)
-            for action in problem.get_actions(node.state):
-                s = problem.get_result(node.state, action)
-                cost = node.cost + problem.get_action_cost(node.state, action)
+            for action in self.problem.get_actions(node.state):
+                s = self.problem.get_result(node.state, action)
+                cost = node.cost + self.problem.get_action_cost(node.state, action)
                 function_measure = self.evaluation_function.evaluate(s, cost)
                 if s not in reached or function_measure < reached[s].func_measure:
                     child = Node(s, node, action, cost, function_measure)

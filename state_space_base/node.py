@@ -1,6 +1,5 @@
 from state import State
-from action import Action
-from typing import Type
+from state_space_base.action import Action
 
 
 class Node:
@@ -19,13 +18,19 @@ class Node:
         self.func_measure = func_measure
 
     def __lt__(self, other):
+        if type(other) == float:
+            return self.func_measure < other
         return self.func_measure < other.func_measure
 
     def __eq__(self, other):
+        if type(other) == float:
+            return self.func_measure == other
         return self.func_measure == other.func_measure
 
     def __gt__(self, other):
-        return self.func_measure < other.func_measure
+        if type(other) == float:
+            return self.func_measure > other
+        return self.func_measure > other.func_measure
 
     def __hash__(self):
         return hash(self.func_measure)

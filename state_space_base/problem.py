@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
-from node import Node
 from state import State
-from action import Action
-from evaluation_function import HeuristicEvaluationFunction
+from state_space_base.action import Action
+from state_space_base.evaluation_function import HeuristicEvaluationFunction
 
 
 class Problem(ABC):

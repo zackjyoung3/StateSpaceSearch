@@ -2,7 +2,7 @@ import random
 import unittest
 import heapq
 
-from priority_queue import MinPriorityQueue
+from priority_queue.priority_queue import MinPriorityQueue
 
 
 class MinPriorityQueueTestClass(unittest.TestCase):

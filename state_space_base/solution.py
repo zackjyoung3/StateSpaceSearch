@@ -1,4 +1,4 @@
-from node import Node
+from state_space_base.node import Node
 
 
 class Solution:
@@ -19,7 +19,12 @@ class Solution:
         return path
 
     def __str__(self):
+        string = ''
         for node in self.solution_path:
             if node.prev_action is not None:
-                print(node.prev_action)
-            print(node)
+                string += str(node.prev_action) + '\n'
+            string += str(node.state) + '\n'
+        return string
+
+    def __eq__(self, other):
+        return self.__str__() == str(other)

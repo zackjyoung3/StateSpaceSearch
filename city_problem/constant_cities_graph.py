@@ -54,8 +54,8 @@ for i in range(len(cities)):
             neighbor_name, neighbor_x, neighbor_y = neighbor_city
 
             distance = euclidean_distance(current_x, current_y, neighbor_x, neighbor_y)
-            # Add rand num in [1,1000] to make the cost greater than the distance
-            cost = distance + random.randint(1, 1000)
+            # Add rand num in [1,10000] to make the cost greater than the distance
+            cost = distance + random.randint(1, 10000)
 
             GRAPH[current_city].append((neighbor_city, cost))
 
